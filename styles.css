@@ -1,0 +1,553 @@
+/* ============================================================
+   CSS Variables
+   ============================================================ */
+:root {
+  --cream:       #faf8f3;
+  --ivory:       #f2ede2;
+  --white:       #ffffff;
+  --gold:        #b8963e;
+  --gold-light:  #d4b86a;
+  --gold-pale:   #e8d9b0;
+  --gold-glow:   rgba(184, 150, 62, 0.12);
+  --green:       #1a3328;
+  --green-deep:  #111f18;
+  --green-mid:   #284d3a;
+  --border:      rgba(184, 150, 62, 0.22);
+  --text:        #1c180f;
+  --text-muted:  #6b5d49;
+  --text-light:  #9a8c77;
+
+  --font-serif:  'Cormorant Garamond', 'Georgia', serif;
+  --font-sans:   'Jost', 'Helvetica Neue', sans-serif;
+
+  --max-w:       880px;
+  --ease:        cubic-bezier(0.4, 0, 0.2, 1);
+  --transition:  0.3s var(--ease);
+}
+
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+img, svg { display: block; max-width: 100%; }
+
+/* ============================================================
+   Islamic Geometric Background Pattern (SVG via CSS)
+   ============================================================ */
+.hero__pattern,
+.closing__pattern {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23b8963e' stroke-width='0.45'%3E%3Cpath d='M40,8 L43.5,26 L58,18 L48,30 L66,33 L48,37 L58,50 L43.5,42 L40,60 L36.5,42 L22,50 L32,37 L14,33 L32,30 L22,18 L36.5,26 Z'/%3E%3Ccircle cx='40' cy='33' r='6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   Layout Helpers
+   ============================================================ */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 400;
+  color: var(--green);
+  text-align: center;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.section-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.06em;
+  margin-bottom: 2.5rem;
+}
+
+/* ============================================================
+   Scroll Fade-Up Animation
+   ============================================================ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+.fade-up.visible  { opacity: 1; transform: translateY(0); }
+
+.delay-1 { transition-delay: 0.12s; }
+.delay-2 { transition-delay: 0.24s; }
+.delay-3 { transition-delay: 0.36s; }
+.delay-4 { transition-delay: 0.50s; }
+.delay-5 { transition-delay: 0.64s; }
+
+/* ============================================================
+   Ornament Lines
+   ============================================================ */
+.ornament {
+  width: 200px;
+  margin: 0 auto 1.6rem;
+  color: var(--gold);
+  opacity: 0.75;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1.5rem 6rem;
+  background-color: var(--green-deep);
+  background-image:
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(42, 77, 58, 0.55) 0%, transparent 70%);
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero__glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184,150,62,0.06) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 680px;
+}
+
+.hero__bismillah {
+  font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+  color: var(--gold-light);
+  font-family: 'Georgia', serif;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.hero__invite {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(232, 217, 176, 0.55);
+  margin-bottom: 0.75rem;
+}
+
+.hero__nikah {
+  font-family: var(--font-serif);
+  font-size: clamp(4.5rem, 14vw, 8rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gold-light);
+  letter-spacing: 0.1em;
+  line-height: 1;
+  margin-bottom: 1.8rem;
+  /* subtle text shadow for depth */
+  text-shadow: 0 2px 40px rgba(184, 150, 62, 0.18);
+}
+
+.hero__names {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.2rem;
+  margin-bottom: 1.8rem;
+}
+
+.hero__name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4.5vw, 2.6rem);
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 0.08em;
+}
+
+.hero__ampersand {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-style: italic;
+  color: var(--gold);
+  opacity: 0.85;
+}
+
+.hero__date {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(232, 217, 176, 0.45);
+  margin-top: 1rem;
+}
+
+/* Scroll mouse indicator */
+.hero__scroll {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  width: 26px;
+  height: 42px;
+  border: 1.5px solid rgba(184, 150, 62, 0.35);
+  border-radius: 13px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 6px;
+  transition: border-color var(--transition);
+}
+.hero__scroll:hover { border-color: rgba(184, 150, 62, 0.65); }
+.hero__scroll span {
+  width: 3px;
+  height: 7px;
+  background: var(--gold-light);
+  border-radius: 2px;
+  animation: scrollDot 2s ease-in-out infinite;
+}
+@keyframes scrollDot {
+  0%   { transform: translateY(0);    opacity: 1; }
+  75%  { transform: translateY(14px); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 0; }
+}
+
+/* ============================================================
+   COUNTDOWN
+   ============================================================ */
+.countdown {
+  background: var(--ivory);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 4rem 1.5rem;
+}
+
+.countdown__track {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1.4rem;
+}
+
+.countdown__num {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 9vw, 5rem);
+  font-weight: 300;
+  color: var(--green);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  /* animate digit flips */
+  transition: transform 0.15s var(--ease);
+}
+
+.countdown__lbl {
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-top: 0.5rem;
+}
+
+.countdown__colon {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 7vw, 3.6rem);
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.5;
+  line-height: 1;
+  padding-top: 0.05em;
+  align-self: flex-start;
+}
+
+/* ============================================================
+   DETAILS
+   ============================================================ */
+.details {
+  padding: 6rem 1.5rem;
+  background: var(--cream);
+}
+
+.details .section-title { margin-bottom: 3rem; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 2.5rem 1.5rem 2.2rem;
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(26, 51, 40, 0.09);
+}
+
+.card__icon {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 1.25rem;
+  color: var(--gold);
+}
+
+.card__label {
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 0.6rem;
+}
+
+.card__sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.card__value {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 500;
+  color: var(--green);
+  letter-spacing: 0.03em;
+  line-height: 1.3;
+}
+
+.card__note {
+  font-size: 0.73rem;
+  color: var(--text-light);
+  margin-top: 0.3rem;
+}
+
+.details__cta { text-align: center; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 1px;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition);
+}
+
+.btn--primary {
+  background: var(--green);
+  color: var(--gold-pale);
+}
+.btn--primary:hover {
+  background: var(--green-mid);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(26, 51, 40, 0.22);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--green);
+  border: 1.5px solid rgba(26, 51, 40, 0.45);
+}
+.btn--outline:hover {
+  background: var(--green);
+  color: var(--gold-pale);
+  border-color: var(--green);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(26, 51, 40, 0.18);
+}
+
+/* ============================================================
+   MAP
+   ============================================================ */
+.map-section {
+  padding: 6rem 1.5rem;
+  background: var(--ivory);
+}
+
+.map-frame {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 6px 28px rgba(26, 51, 40, 0.07);
+}
+.map-frame iframe { display: block; }
+
+.map-section__cta { text-align: center; }
+
+/* ============================================================
+   CLOSING
+   ============================================================ */
+.closing {
+  position: relative;
+  padding: 6.5rem 1.5rem;
+  background: var(--green-deep);
+  text-align: center;
+  overflow: hidden;
+}
+
+.closing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(42,77,58,0.5) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.closing__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.closing__star {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 2.2rem;
+  color: var(--gold-light);
+  opacity: 0.65;
+}
+
+.closing__ayah {
+  font-family: 'Georgia', serif;
+  font-size: clamp(1.15rem, 3vw, 1.65rem);
+  color: var(--gold-light);
+  line-height: 2;
+  margin-bottom: 1rem;
+  direction: rtl;
+}
+
+.closing__trans {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.88rem, 2vw, 1rem);
+  color: rgba(232, 217, 176, 0.55);
+  max-width: 480px;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
+}
+
+.closing__rule {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 2.5rem;
+  opacity: 0.35;
+}
+
+.closing__msg {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(250, 248, 243, 0.72);
+  line-height: 2;
+  margin-bottom: 2.2rem;
+}
+
+.closing__couple {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+  font-weight: 500;
+  color: var(--gold-light);
+  letter-spacing: 0.06em;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: var(--green-deep);
+  border-top: 1px solid rgba(184, 150, 62, 0.1);
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: rgba(232, 217, 176, 0.28);
+}
+.footer span { color: var(--gold); }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 640px) {
+  .hero__names    { flex-direction: column; gap: 0.3rem; }
+  .hero__ampersand { font-size: 1rem; }
+  .cards          { grid-template-columns: 1fr; max-width: 340px; margin-left: auto; margin-right: auto; }
+
+  .countdown__unit   { padding: 0 0.8rem; }
+  .countdown__colon  { font-size: 2rem; }
+}
+
+@media (max-width: 380px) {
+  .countdown__colon { display: none; }
+  .countdown__track { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+}
